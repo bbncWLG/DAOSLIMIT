@@ -26,7 +26,7 @@ The code is tested in MATLAB 2018b (64bit) under the MS Windows 10 64bit version
 1. unpack the package
 2. include code/subdirectory in your Matlab path
 3. Try the examples included in this package.
-4. Download the required data and PSF through "xxxxxxxxxxxxxxxx"
+4. Download the required data and PSF through "https://cloud.tsinghua.edu.cn/d/04b591075e184283b606/"
    a). The Lightfield Data referred to Fig.1F (the imaging of neutrophils in mice liver) and Fig.S5C (the imaging of the testis slice) in our paper are saved in "Raw" which can be used for test. 
    b). MAT file of the experimental calibrated point spread function  is located in dir "PSFmatrix". Readers can also generate the similar ideal PSFs by running "computePSF.m".
 
