@@ -26,7 +26,7 @@ The code is tested in MATLAB 2018b (64bit) under the MS Windows 10 64bit version
 1. Unpack the package
 2. Include code/subdirectory in your Matlab path.
 3. Try the examples included in this package.
-4. Download the required data and PSF through "xxxxxxxxxxxxxxxx".
+4. Download the required data and PSF through "https://cloud.tsinghua.edu.cn/d/1f421dfca09f4f469c79/".
 
     (a). The scanning Lightfield Data referred to Fig.1F (the imaging of neutrophils in mice liver), Fig.S1F (the simulation of fluorescent beads) and Fig.S5C (the imaging of the testis slice) in our paper are saved in "Raw" which can be used for test. 
 
