@@ -20,10 +20,10 @@ Nnum =      13; %% number of virtual pixels
 OSR =       3; %% spatial oversampling ratio for computing PSF
 n =         1.515; %% refractive index
 fml =       2100e-6; %% focal length of the microlens pitch
-M =         72.15; %% magnification of the objective lens
+M =         63; %% magnification of the objective lens
 lambda =    525*1e-9; %% wavelength
-zmax =      10*1e-6; %% the axial location of the highest z-plane with respect to the focal plane
-zmin =      -10*1e-6; %% the axial location of the lowest z-plane with respect to the focal plane
+zmax =      8*1e-6; %% the axial location of the highest z-plane with respect to the focal plane
+zmin =      -8*1e-6; %% the axial location of the lowest z-plane with respect to the focal plane
 zspacing =  0.2*1e-6; %% spacing between adjacent z-planes
 eqtol = 1e-10;
 k = 2*pi*n/lambda; %% k
@@ -53,7 +53,7 @@ p3max = max(abs(x3objspace));
 x1testspace = (pixelPitch/OSR)* [0:1: Nnum*OSR*60];
 x2testspace = [0];   
 [psfLine] = calcPSFFT(p3max, fobj, NA, x1testspace, pixelPitch/OSR, lambda, d, M, n);
-outArea = find(psfLine<0.01);
+outArea = find(psfLine<0.1);
 if isempty(outArea),
    error('Estimated PSF size exceeds the limit');   
 end
@@ -265,7 +265,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 disp(['Saving PSF matrix file...']);
-save('psf',['psf_M',num2str(M),'_NA',num2str(NA),'zmin',num2str(zmin),'u_zmax',num2str(zmax),'u.mat'],'-v7.3');
+save(['../PSFmatrix/Ideal_psf_M',num2str(M),'_NA',num2str(NA),'_zmin',num2str(zmin*1e+6),'u_zmax',num2str(zmax*1e+6),'u.mat'],'psf','-v7.3');
 disp(['PSF computation complete.']);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

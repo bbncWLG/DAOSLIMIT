@@ -1,4 +1,4 @@
-function Xguess = deconvRL(maxIter, Xguess,WDF, psf,weight,AO,GPUcompute)
+function Xguess = deconvRL(maxIter, Xguess,WDF, psf,weight,DAO,GPUcompute)
 % Deconvolution for the single-frame multiplexed phase-space data
 %% Input:
 % @maxIter: the maximum iteration number 
@@ -33,8 +33,8 @@ index2=[1,2,3,4,5,6,7,8,9,10,11,12,13,13,13,13,13,13,13,13,13,13,13,13,13,12,11,
 for iter=1:maxIter
     tic;
     % Digital adaptive optics to estimate aberration
-    if AO>0 % DAO on
-        sidelobe=50; %% reserved image border
+    if DAO>0 % DAO on
+        sidelobe=round(0.04*size(WDF,1)); %% reserved image border
         Nb=1;
         map_wavshape=zeros(Nnum,Nnum,Nb,Nb,2);     
         Sb=fix( 0.9*size(WDF,1)/(Nb)/2 )*2+1;
@@ -52,7 +52,7 @@ for iter=1:maxIter
                         psf_uv=gpuArray(single(squeeze(psf(:,:,u,v,:))));
                         forwardFUN = @(Xguess) forwardProjectGPU( psf_uv, Xguess );
                     else
-                        psf_uv=gpuArray(single(squeeze(psf(:,:,u,v,:))));
+                        psf_uv=single(squeeze(psf(:,:,u,v,:)));
                         forwardFUN = @(Xguess) forwardProjectACC( psf_uv, Xguess );
                     end
                     HXguess=forwardFUN(Xguess); 
@@ -115,7 +115,7 @@ for iter=1:maxIter
         if weight(u,v)==0
             continue;
         else   
-            if AO>0 && iter>1
+            if DAO>0 && iter>1
                 % correct aberration
                 map_wavshape_x=squeeze(map_wavshape(u,v,:,:,1));
                 map_wavshape_y=squeeze(map_wavshape(u,v,:,:,2));
@@ -124,7 +124,11 @@ for iter=1:maxIter
                 map_wavshape_xx=imresize(map_wavshape_x1,[size(WDF,1),size(WDF,2)],'cubic');
                 map_wavshape_yy=imresize(map_wavshape_y1,[size(WDF,1),size(WDF,2)],'cubic');
                 [coordinate1,coordinate2]=meshgrid(1:size(WDF,1),1:size(WDF,2));
-                WDF_uv=gpuArray(interp2(coordinate1,coordinate2,WDF(:,:,u,v),coordinate1+map_wavshape_yy,coordinate2+map_wavshape_xx,'cubic',0));
+                if GPUcompute==1
+                    WDF_uv=gpuArray(interp2(coordinate1,coordinate2,WDF(:,:,u,v),coordinate1+map_wavshape_yy,coordinate2+map_wavshape_xx,'cubic',0));
+                else
+                    WDF_uv=interp2(coordinate1,coordinate2,WDF(:,:,u,v),coordinate1+map_wavshape_yy,coordinate2+map_wavshape_xx,'cubic',0);
+                end
             else
                 WDF_uv=WDF(:,:,u,v);
             end
@@ -134,7 +138,7 @@ for iter=1:maxIter
                  backwardFUN = @(projection) backwardProjectGPU(psf_uv, projection );
                  uniform_matrix = gpuArray(single (ones(  size(WDF,1),size(WDF,2) )));
             else
-                psf_uv=gpuArray(single(squeeze(psf(:,:,u,v,:))));
+                psf_uv=single(squeeze(psf(:,:,u,v,:)));
                 forwardFUN = @(Xguess) forwardProjectACC( psf_uv, Xguess );
                 backwardFUN = @(projection) backwardProjectACC(psf_uv, projection );
                 uniform_matrix = single (ones(  size(WDF,1),size(WDF,2) ));
@@ -153,6 +157,7 @@ for iter=1:maxIter
             Xguess=Xguess_add.*weight(u,v)+(1-weight(u,v)).*Xguess;
             clear Xguess_add;
             Xguess(find(isnan(Xguess))) = 0;
+            Xguess(Xguess<1e-4)=0;
         end
     end
     ttime = toc;
