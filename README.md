@@ -23,26 +23,23 @@ How to use
 ----------------
 The code is tested in MATLAB 2018b (64bit) under the MS Windows 10 64bit version with an Intel i9-9980XE CPU, NVIDIA GeForce RTX 2080 Ti GPU and 128GB RAM.
 
-1. unpack the package
-2. include code/subdirectory in your Matlab path
+1. Unpack the package
+2. Include code/subdirectory in your Matlab path
 3. Try the examples included in this package.
-4. Download the required data and PSF through "https://cloud.tsinghua.edu.cn/d/04b591075e184283b606/"
-   a). The Lightfield Data referred to Fig.1F (the imaging of neutrophils in mice liver) and Fig.S5C (the imaging of the testis slice) in our paper are saved in "Raw" which can be used for test. 
+4. Download the required data and PSF through "xxxxxxxxxxxxxxxx"
+   a). The scanning Lightfield Data referred to Fig.1F (the imaging of neutrophils in mice liver), Fig.S1F (the simulation of fluorescent beads) and Fig.S5C (the imaging of the testis slice) in our paper are saved in "Raw" which can be used for test. 
    b). MAT file of the experimental calibrated point spread function  is located in dir "PSFmatrix". Readers can also generate the similar ideal PSFs by running "computePSF.m".
+5. Run main_for_static.m or main_for_timelapse.m for static or time-lapse data.
 
 ----------------
 Main modules description
 ----------------
-1. computePSF.m: to calculate high-resolution phase-space PSF based on wave optics theory.
-2. ImageRectification.m: to rectificate raw scanning LF images for single-frame data
-    or ImageRectification_TimeSeries.m: to rectificate raw scanning LF images for time-series data
-3. Realign.m: to pixel-realign scanning light field data to multiplexed phase-space for single-frame data
-    or Realign_TimeSeries.m: to pixel-realign scanning light field data to multiplexed phase-space for time-series data
-4. Timeweighted.m: to adjust the weight in different scanning sampling time-points to remove motion artefacts for single-frame data
-    or Timeweighted_TimeSeries.m: to adjust the weight in different scanning sampling time-points to remove motion artefacts for time-series data
-5. Reconsruction3D.m: to reconstruct 3D high-resolution volume with DAO for single-frame data
-    or Reconsruction3D_TimeSeries.m: to reconstruct 3D high-resolution volume with DAO for time-series data
-* Please run the code in the above order.
+1. computePSF.m: to calculate ideal high-resolution phase-space PSF based on wave optics theory (or using experimental PSF, which is located in dir "PSFmatrix").
+2. main_for_static_testis.m: Pre-processes and 3D reconstruciton with DAO (for single-frame static data) (>=70 GB memory)
+    main_for_static_beads.m: Pre-processes and 3D reconstruciton with DAO (for single-frame static data) (>=16 GB memory)
+3. main_for_timelapse_miceliver.m: Pre-processes and 3D reconstruciton with DAO (for time-lapse data) (>=40 GB memory)
+* Pre-processes including ImageRectification, Realignment, Timeweighted algorithm and 3D deconvolution with DAO, are involved in main_for_static.m and main_for_timelapse.m.
+
 ----------------
 IMPORTANT NOTE 
 ----------------
