@@ -12,19 +12,19 @@ addpath('./Solver/');
 addpath('./Util/');
 
 % Preparameters
+GPUcompute=1; %% GPU accelerator (on/off)
+DAO=1;     %% digital adaptive optics (on/off)
 filepath='Data//20200628Beads.tif'; %% the filepath of raw scanning light field data
-Nx=15; %% half of used microlens number in the first dimension
-Ny=15; %% half of uesd microlens number in the second dimension
+Nx=15; %%  half FOV in terms of the number of microlens in the first dimension
+Ny=15; %%  half FOV in terms of the number of microlens in the second dimension
 centerX=202; %% central coordinate in the first dimension
 centerY=202; %% central coordinate in the second dimension
 Nshift=3; %% the sampling points of a single scanning period
-Nnum=13; %% number of virtual pixels
+Nnum=13; %% the number of sensor pixels after each microlens/ the number of angles in one dimension
 maxIter=20; %% the maximum iteration number 
-ExperimentalPSF=0; %% using experimental PSF or ideal PSF
-GPUcompute=1; %% GPU accelerator (on/off)
-DAO=1;     %% digital adaptive optics (on/off)
+ExperimentalPSF=0; %%  using experimental PSF (1) or simulated ideal PSF (0)
 time_weight_index=1; %% timeweighted coefficient, ranging from 0 to 1
-frame=0; %% frame=0 if the data is static
+
 
 % scanning order
 if Nshift==3
@@ -80,6 +80,7 @@ end
 
 
 % Time-weighted
+frame=0; %% if the data is static, otherwise corresponding to the frame number of the video
 WDF=time_weighted(WDF,time_weight_index,index1,index2,Nshift,Nnum,frame);
 
 % Initialization
