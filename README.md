@@ -27,9 +27,10 @@ The code is tested in MATLAB 2018b (64bit) under the MS Windows 10 64bit version
 2. Include subdirectory in your Matlab path
 3. Run main_for_static.m or main_for_timelapse.m for static or time-lapse data.
    a). The scanning Lightfield Data referred to Fig.1F (the imaging of neutrophils in mouse liver), Fig.S1F (the simulation of fluorescent beads) and Fig.S5C (the imaging of the testis slice) in our paper are saved in "Data" which can be used for test. 
-   b). MAT file of the experimental calibrated point spread function is located in dir "PSF". Readers can also generate the similar ideal PSFs by running "main_computePSF.m" (based on wave optics theory[1]), which is located in dir "PSFcalculation".
+   b). MAT file of the experimental calibrated point spread function is located in dir "PSF". Readers can also generate the similar ideal PSFs by running "main_computePSF.m" (based on wave optics theory and phase-space theory [1][2]), which is located in dir "PSFcalculation".
 * Download the test scanning light filed images (neutrophils in mouse liver, the testis slice) and experimental PSFs from the following link.
 https://drive.google.com/drive/folders/101IHbAApPF-Z734UtjDOZHEZwtBleQgC?usp=sharing
+
 
 ----------------
 Main modules description
