@@ -13,16 +13,16 @@ addpath('./Solver/');
 addpath('./Util/');
 
 % Preparameters
-filepath='Data/20191107Neutrophil.tif'; %% the filepath of raw scanning light field data
-Nx=30; %% half of uesd microlens number in the first dimension
-Ny=30; %% half of used microlens number in the second dimension
+GPUcompute=1; %% GPU accelerator (on/off)
+filepath='Data/20191107Neutrophil.tif'; %% the filepath of raw scanning light field data, download from Google Drive (https://drive.google.com/drive/folders/101IHbAApPF-Z734UtjDOZHEZwtBleQgC?usp=sharing)
+Nx=30; %% half FOV in terms of the number of microlens in the first dimension
+Ny=30; %% half FOV in terms of the number of microlens in the second dimension
 centerX=1088; %% central coordinate in the first dimension
 centerY=724; %% central coordinate in the second dimension
 Nshift=3; %% the sampling points of a single scanning period
-Nnum=13; %% number of virtual pixels
+Nnum=13; %% the number of sensor pixels after each microlens/ the number of angles in one dimension
 maxIter=1; %% the maximum iteration number of single frame
-ExperimentalPSF=1; %% using experimental PSF or ideal PSF
-GPUcompute=1; %% GPU accelerator (on/off)
+ExperimentalPSF=1; %% using experimental PSF (1) or simulated ideal PSF (0)
 time_weight_index=0.2; %% timeweighted coefficient, ranging from 0 to 1
 
 
@@ -34,7 +34,7 @@ end
 if ExperimentalPSF==0
     load('PSF/Ideal_psf_M63_NA1.4_zmin-12u_zmax12u.mat'); %% the filepath of ideal PSF
 else
-    load('PSF/Experimental_psf_M63_NA1.4_zmin-12u_zmax12u.mat'); %% the filepath of experimental PSF
+    load('PSF/Experimental_psf_M63_NA1.4_zmin-12u_zmax12u.mat'); %% the filepath of experimental PSF, download from Google Drive (https://drive.google.com/drive/folders/101IHbAApPF-Z734UtjDOZHEZwtBleQgC?usp=sharing)
 end
 weight=squeeze(sum(sum(sum(psf,1),2),5))./sum(psf(:));
 weight=weight-min(weight(:));

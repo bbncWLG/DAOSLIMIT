@@ -23,7 +23,6 @@ Nshift=3; %% the sampling points of a single scanning period
 Nnum=13; %% the number of sensor pixels after each microlens/ the number of angles in one dimension
 maxIter=20; %% the maximum iteration number 
 ExperimentalPSF=0; %%  using experimental PSF (1) or simulated ideal PSF (0)
-time_weight_index=1; %% timeweighted coefficient, ranging from 0 to 1
 
 
 % scanning order
@@ -32,9 +31,9 @@ if Nshift==3
     index2=[1,1,1,2,3,3,3,2,2];
 end
 if ExperimentalPSF==0
-    load('PSF/Ideal_psf_M63_NA1.4_zmin-8u_zmax8u.mat'); %% the filepath of ideal PSF
+    load('PSF/Ideal_psf_M63_NA1.4_zmin-8u_zmax6u.mat'); %% the filepath of ideal PSF
 else
-    load('PSF/Experimental_psf_M63_NA1.4_zmin-8u_zmax8u.mat','psf'); %% the filepath of experimental PSF
+    load('PSF/Experimental_psf_M63_NA1.4_zmin-8u_zmax6u.mat','psf'); %% the filepath of experimental PSF
 end
 weight=squeeze(sum(sum(sum(psf,1),2),5))./sum(psf(:));
 weight=weight-min(weight(:));
@@ -78,10 +77,6 @@ for a=1:size(sLF,1)/Nnum
     end
 end
 
-
-% Time-weighted
-frame=0; %% if the data is static, otherwise corresponding to the frame number of the video
-WDF=time_weighted(WDF,time_weight_index,index1,index2,Nshift,Nnum,frame);
 
 % Initialization
 WDF=imresize(WDF,[size(WDF,1)*Nnum/Nshift,size(WDF,2)*Nnum/Nshift]);

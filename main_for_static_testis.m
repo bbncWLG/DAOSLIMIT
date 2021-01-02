@@ -12,19 +12,17 @@ addpath('./Solver/');
 addpath('./Util/');
 
 % Preparameters
+GPUcompute=1; %% GPU accelerator (on/off)
+DAO=1;     %% digital adaptive optics (on/off)
 filepath='Data/20191211Testis.tif'; %% the filepath of raw scanning light field data
-Nx=50; %% half of used microlens number in the first dimension
-Ny=50; %% half of uesd microlens number in the second dimension
+Nx=50; %% half FOV in terms of the number of microlens in the first dimension
+Ny=50; %% half FOV in terms of the number of microlens in the second dimension
 centerX=657; %% central coordinate in the first dimension
 centerY=657; %% central coordinate in the second dimension
 Nshift=3; %% the sampling points of a single scanning period
-Nnum=13; %% number of virtual pixels
+Nnum=13; %% the number of sensor pixels after each microlens/ the number of angles in one dimension
 maxIter=10; %% the maximum iteration number 
-ExperimentalPSF=1; %% using experimental PSF or ideal PSF
-GPUcompute=1; %% GPU accelerator (on/off)
-DAO=1;     %% digital adaptive optics (on/off)
-time_weight_index=1; %% timeweighted coefficient, ranging from 0 to 1
-frame=0; %% frame=0 if the data is static
+ExperimentalPSF=1; %% using experimental PSF (1) or simulated ideal PSF (0)
 
 % scanning order
 if Nshift==3
@@ -34,7 +32,7 @@ end
 if ExperimentalPSF==0
     load('PSF/Ideal_psf_M40_NA1.0_zmin-15u_zmax30u.mat'); %% the filepath of ideal PSF
 else
-    load('PSF/Experimental_psf_M40_NA1.0_zmin-15u_zmax30u.mat','psf'); %% the filepath of experimental PSF
+    load('PSF/Experimental_psf_M40_NA1.0_zmin-15u_zmax30u.mat','psf'); %% the filepath of experimental PSF, download from Google Drive (https://drive.google.com/drive/folders/101IHbAApPF-Z734UtjDOZHEZwtBleQgC?usp=sharing)
 end
 weight=squeeze(sum(sum(sum(psf,1),2),5))./sum(psf(:));
 weight=weight-min(weight(:));
@@ -79,8 +77,6 @@ for a=1:size(sLF,1)/Nnum
 end
 
 
-% Time-weighted
-WDF=time_weighted(WDF,time_weight_index,index1,index2,Nshift,Nnum,frame);
 
 % Initialization
 WDF=imresize(WDF,[size(WDF,1)*Nnum/Nshift,size(WDF,2)*Nnum/Nshift]);
