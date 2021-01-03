@@ -29,7 +29,7 @@ The code is tested in MATLAB 2018b (64bit) under the MS Windows 10 64bit version
 2. Include subdirectory in your Matlab path
 3. Run the .m files with the prefix of "main" for static or time-lapse data.
 
-   a). The raw data of the scanning light field should be placed in the folder of "Data". We have provided several example data for test, including, time-lapse video of neutrophils in mouse liver(63x/1.4NA oil immersion objective), simulated fluorescent beads(63x/1.4NA oil immersion objective), the autofluorescence of a fixed testis slice(40x/1.0NA water immersion objective)) and the membrane-labelled zebrafish embryos(63x/1.4NA oil immersion objective). Some of the data are too large for GitHub. So we upload them in the google drive described before. 
+   a). The raw data of the scanning light field should be placed in the folder of "Data". We have provided several example data for test, including, time-lapse video of neutrophils in mouse liver (63x/1.4NA oil immersion objective), simulated fluorescent beads (63x/1.4NA oil immersion objective), the autofluorescence of a fixed testis slice (40x/1.0NA water immersion objective) and the membrane-labelled zebrafish embryos (63x/1.4NA oil immersion objective). Some of the data are too large for GitHub. So we upload them in the google drive described before. 
    
    b). The PSF files in the format of .mat should be placed in the folder of "PSF". Some of the PSFs are too large, especially for experimental PSFs. So we have uploaded them in the same link described before. Readers can also generate the simulated ideal PSFs by running "main_computePSF.m" (based on wave optics theory and phase-space theory [1][2]), which is located in the folder of "PSFcalculation".
 

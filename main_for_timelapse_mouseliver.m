@@ -25,6 +25,9 @@ maxIter=1; %% the maximum iteration number of single frame
 ExperimentalPSF=1; %% using experimental PSF (1) or simulated ideal PSF (0)
 time_weight_index=0.2; %% timeweighted coefficient, ranging from 0 to 1
 
+minFrame=0; %% the started frame
+maxFrame=80; %% the end frame
+Fstep=1; %% the spacing between adjacent frames
 
 % scanning order
 if Nshift==3
@@ -46,12 +49,6 @@ for u=1:Nnum
         end
     end
 end
-
-
-minFrame=0; %% the started frame
-maxFrame=80; %% the end frame
-Fstep=1; %% the spacing between adjacent frames
-
 
 Fcount=minFrame;
 for frame = [minFrame: Fstep: maxFrame, maxFrame: -Fstep: minFrame] %% time-loop
@@ -108,7 +105,7 @@ for frame = [minFrame: Fstep: maxFrame, maxFrame: -Fstep: minFrame] %% time-loop
     else
         DAO = 1; %% DAO on, after 2 frames were deconvolved in time-loop
     end
-    Nb=1; %% Number of blocks for multi-AO in one dimension
+    Nb=1;      %% Number of blocks for multi-site AO in one dimension
     
     % 3D deconvolution with DAO
     tic;

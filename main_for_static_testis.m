@@ -14,7 +14,6 @@ addpath('./Util/');
 % Preparameters
 GPUcompute=1; %% GPU accelerator (on/off)
 DAO=1;     %% digital adaptive optics (on/off)
-Nb=1;      %% Number of blocks for multi-AO in one dimension
 filepath='Data/20191211Testis.tif'; %% the filepath of raw scanning light field data
 Nx=50; %% half FOV in terms of the number of microlens in the first dimension
 Ny=50; %% half FOV in terms of the number of microlens in the second dimension
@@ -22,7 +21,8 @@ centerX=657; %% central coordinate in the first dimension
 centerY=657; %% central coordinate in the second dimension
 Nshift=3; %% the sampling points of a single scanning period
 Nnum=13; %% the number of sensor pixels after each microlens/ the number of angles in one dimension
-maxIter=10; %% the maximum iteration number 
+maxIter=5; %% the maximum iteration number 
+Nb=1;    %% Number of blocks for multi-site AO in one dimension
 ExperimentalPSF=1; %% using experimental PSF (1) or simulated ideal PSF (0)
 
 % scanning order
