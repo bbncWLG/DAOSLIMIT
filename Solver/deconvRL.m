@@ -1,4 +1,4 @@
-function Xguess = deconvRL(maxIter, Xguess,WDF, psf,weight,DAO,GPUcompute)
+function Xguess = deconvRL(maxIter, Xguess,WDF, psf,weight,DAO,Nb,GPUcompute)
 % Deconvolution for the single-frame multiplexed phase-space data
 %% Input:
 % @maxIter: the maximum iteration number 
@@ -35,9 +35,11 @@ for iter=1:maxIter
     % Digital adaptive optics to estimate aberration
     if DAO>0 % DAO on
         sidelobe=round(0.04*size(WDF,1)); %% reserved image border
-        Nb=1;
         map_wavshape=zeros(Nnum,Nnum,Nb,Nb,2);     
         Sb=fix( 0.9*size(WDF,1)/(Nb)/2 )*2+1;
+        if Sb<50
+            error('Pixel number of single block for multi-AO is too small.');
+        end
         border=(size(WDF,1)-Sb*Nb)/2;
         weight_mask=single(im2bw(gather(weight),1e-5));
         [Sx,Sy]=meshgrid(-fix(Nnum/2):fix(Nnum/2),-fix(Nnum/2):fix(Nnum/2));
@@ -149,6 +151,7 @@ for iter=1:maxIter
             errorEM(~isfinite(errorEM))=0;
             XguessCor = backwardFUN(errorEM) ; 
             Htf=backwardFUN( uniform_matrix );
+            Htf(Htf<1e-4)=0;
             Xguess_add=Xguess.*XguessCor./Htf;
             clear Htf;clear XguessCor;
             Xguess_add(find(isnan(Xguess_add))) = 0;
@@ -157,7 +160,7 @@ for iter=1:maxIter
             Xguess=Xguess_add.*weight(u,v)+(1-weight(u,v)).*Xguess;
             clear Xguess_add;
             Xguess(find(isnan(Xguess))) = 0;
-            Xguess(Xguess<1e-4)=0;
+            Xguess(Xguess<1e-4)=1e-4;
         end
     end
     ttime = toc;

@@ -10,13 +10,15 @@ Edited based on the reference [1][2].
 Matlab code for "3D observation of large-scale subcellular dynamics in vivo at the millisecond scale"
 ==========================================================
 
-This package contains an implementation of the DAOSLIMIT algorithm described in the paper: 
+This package contains the implementations of the algorithms, including pixel realignment, mutual iterative tomography with DAO, time-weighted algorithm, and time-loop reconstructions for time-lapse data, which are described in detail in the paper: 
 JIAMIN WU, ZHI LU, DONG JIANG and YUDUO GUO.etc,  "3D observation of large-scale subcellular dynamics in vivo at the millisecond scale".
 
-Please cite our paper if using the code to generate data (e.g., images, tables of processing times, etc.) 
-in an academic publication.
+Please cite our paper if using the code to generate data (e.g., images, tables of processing times, etc.) in an academic publication.
 
 For algorithmic details, please refer to our paper.
+
+Additional example data and experimental PSFs can be downloaded with the following link:
+https://drive.google.com/drive/folders/101IHbAApPF-Z734UtjDOZHEZwtBleQgC?usp=sharing
 
 ----------------
 How to use
@@ -25,10 +27,11 @@ The code is tested in MATLAB 2018b (64bit) under the MS Windows 10 64bit version
 
 1. Unpack the package
 2. Include subdirectory in your Matlab path
-3. Run main_for_static.m or main_for_timelapse.m for static or time-lapse data.
-   a). The scanning Lightfield Data referred to Fig.1F (the imaging of neutrophils in mouse liver), Fig.S1F (the simulation of fluorescent beads) and Fig.S5C (the imaging of the testis slice) in our paper are saved in "Data" which can be used for test. 
-   b). MAT file of the experimental calibrated point spread function is located in dir "PSF". Readers can also generate the similar ideal PSFs by running "main_computePSF.m" (based on wave optics theory and phase-space theory [1][2]), which is located in dir "PSFcalculation".
-* Download the test scanning light filed images (neutrophils in mouse liver) and experimental PSFs from the following link.
+3. Run the .m files with the prefix of "main" for static or time-lapse data.
+   a). The raw data of the scanning light field should be placed in the folder of "Data". We have provided several example data for test, including, time-lapse video of neutrophils in mouse liver(63x/1.4NA oil immersion objective), simulated fluorescent beads(63x/1.4NA oil immersion objective), the autofluorescence of a fixed testis slice(40x/1.0NA water immersion objective)) and the membrane-labelled zebrafish embryos(63x/1.4NA oil immersion objective). Some of the data are too large for GitHub. So we upload them in the google drive described before. 
+   b). The PSF files in the format of .mat should be placed in the folder of "PSF". Some of the PSFs are too large, especially for experimental PSFs. So we have uploaded them in the same link described before. Readers can also generate the simulated ideal PSFs by running "main_computePSF.m" (based on wave optics theory and phase-space theory [1][2]), which is located in the folder of "PSFcalculation".
+
+* Download more test images and experimental PSFs from the following link.
 https://drive.google.com/drive/folders/101IHbAApPF-Z734UtjDOZHEZwtBleQgC?usp=sharing
 
 
@@ -37,8 +40,9 @@ Main modules description
 ----------------
 1. main_for_static_testis.m: Pre-processes and 3D reconstruciton with DAO (for single-frame static data) (>=70 GB memory)
 2. main_for_static_beads.m: Pre-processes and 3D reconstruciton with DAO (for single-frame static data) (>=16 GB memory)
-3. main_for_timelapse_miceliver.m: Pre-processes and 3D reconstruciton with DAO (for time-lapse data) (>=40 GB memory)
-* Pre-processes including ImageRectification, Realignment, Timeweighted algorithm and 3D deconvolution with DAO, are involved in main_for_static.m and main_for_timelapse.m.
+3. main_for_static_zebraembryos.m: Pre-processes and 3D reconstruciton with DAO (for single-frame static data) (>=32 GB memory)
+3. main_for_timelapse_miceliver.m: Pre-processes and 3D reconstruciton with DAO, time-weighted algorithm and time-loop algorithm (for time-lapse data) (>=40 GB memory)
+* Pre-processes including ImageRectification and pixel realignment are involved in main_for_static.m and main_for_timelapse.m.
 
 ----------------
 IMPORTANT NOTE 

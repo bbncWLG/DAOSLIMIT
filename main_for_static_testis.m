@@ -14,6 +14,7 @@ addpath('./Util/');
 % Preparameters
 GPUcompute=1; %% GPU accelerator (on/off)
 DAO=1;     %% digital adaptive optics (on/off)
+Nb=1;      %% Number of blocks for multi-AO in one dimension
 filepath='Data/20191211Testis.tif'; %% the filepath of raw scanning light field data
 Nx=50; %% half FOV in terms of the number of microlens in the first dimension
 Ny=50; %% half FOV in terms of the number of microlens in the second dimension
@@ -84,7 +85,7 @@ Xguess=ones(size(WDF,1),size(WDF,2),size(psf,5));
 Xguess=Xguess./sum(Xguess(:)).*sum(WDF(:))./(size(WDF,3)*size(WDF,4));
 
 % 3D deconvolution with DAO
-Xguess = deconvRL(maxIter, Xguess,WDF, psf,weight,DAO,GPUcompute);
+Xguess = deconvRL(maxIter, Xguess,WDF, psf,weight,DAO,Nb,GPUcompute);
 
 % save high-resolution reconstructed volume
 mkdir('Recon3D_20191211Testis');

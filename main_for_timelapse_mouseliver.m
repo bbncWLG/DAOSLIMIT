@@ -49,7 +49,7 @@ end
 
 
 minFrame=0; %% the started frame
-maxFrame=90; %% the end frame
+maxFrame=80; %% the end frame
 Fstep=1; %% the spacing between adjacent frames
 
 
@@ -108,10 +108,11 @@ for frame = [minFrame: Fstep: maxFrame, maxFrame: -Fstep: minFrame] %% time-loop
     else
         DAO = 1; %% DAO on, after 2 frames were deconvolved in time-loop
     end
+    Nb=1; %% Number of blocks for multi-AO in one dimension
     
     % 3D deconvolution with DAO
     tic;
-    Xguess = deconvRL_TimeSeries(maxIter, Xguess,WDF, psf,weight,DAO,GPUcompute);
+    Xguess = deconvRL_TimeSeries(maxIter, Xguess,WDF, psf,weight,DAO,Nb,GPUcompute);
     ttime = toc;
     disp(['  Frame = ' num2str(frame) , ' took ', num2str(ttime), ' secs']);    
     
