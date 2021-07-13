@@ -1,8 +1,8 @@
 % Pre-processes and 3D reconstruciton with DAO (for single-frame static data)
 % The Code is created based on the method described in the following paper 
-%   [1]  JIAMIN WU, ZHI LU, DONG JIANG and YUDUO GUO.etc,
-%        3D observation of large-scale subcellular dynamics in vivo at the millisecond scale
-%        in BioRxiv, 2019. 
+%   [1]  JIAMIN WU, ZHI LU and DONG JIANG etc,
+%        Iterative tomography with digital adaptive optics permits hour-long intravital observation of 3D subcellular dynamics at millisecond scale
+%        Cell, 2021. 
 % 
 %    Contact: ZHI LU (luz18@mails.tsinghua.edu.cn)
 %    Date  : 10/24/2020
