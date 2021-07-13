@@ -1,17 +1,16 @@
 # DAOSLIMIT
-Title:      Matlab code for "3D observation of large-scale subcellular dynamics in vivo at the millisecond scale"  
-Author:     JIAMIN WU, ZHI LU, DONG JIANG and YUDUO GUO.etc,  
+Title:      Matlab code for "Iterative tomography with digital adaptive optics permits hour-long intravital observation of 3D subcellular dynamics at millisecond scale"
 Version:    1.0 
-Copyright:  2019, JIAMIN WU, ZHI LU, DONG JIANG, JINGTAO FAN, LI YU, PENG XI, QIONGHAI DAI
+Copyright:  2021, JIAMIN WU, ZHI LU, DONG JIANG, JINGTAO FAN, LI YU, PENG XI, QIONGHAI DAI
 
 Edited based on the reference [1][2].
 
 
-Matlab code for "3D observation of large-scale subcellular dynamics in vivo at the millisecond scale"
+Matlab code for "Iterative tomography with digital adaptive optics permits hour-long intravital observation of 3D subcellular dynamics at millisecond scale"
 ==========================================================
 
 This package contains the implementations of the algorithms, including pixel realignment, mutual iterative tomography with DAO, time-weighted algorithm, and time-loop reconstructions for time-lapse data, which are described in detail in the paper: 
-JIAMIN WU, ZHI LU, DONG JIANG and YUDUO GUO.etc,  "3D observation of large-scale subcellular dynamics in vivo at the millisecond scale".
+JIAMIN WU, ZHI LU and DONG JIANG etc, "Iterative tomography with digital adaptive optics permits hour-long intravital observation of 3D subcellular dynamics at millisecond scale". Cell 2021.
 
 Please cite our paper if using the code to generate data (e.g., images, tables of processing times, etc.) in an academic publication.
 
