@@ -47,7 +47,7 @@ Main modules description
 
 ----------------
 IMPORTANT NOTE 
-----------------
+---------------- 
 Should you have any questions regarding this code and the corresponding results, please contact Zhi Lu (luz18@mails.tsinghua.edu.cn).
 
 Reference:
