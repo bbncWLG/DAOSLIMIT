@@ -1,7 +1,7 @@
 # DAOSLIMIT
 Title:      Matlab code for "Iterative tomography with digital adaptive optics permits hour-long intravital observation of 3D subcellular dynamics at millisecond scale"
 Version:    1.0 
-Copyright:  2021, JIAMIN WU, ZHI LU, DONG JIANG, JINGTAO FAN, LI YU, PENG XI, QIONGHAI DAI
+Copyright:  2021, JIAMIN WU, ZHI LU, DONG JIANG, JINGTAO FAN, LI YU, QIONGHAI DAI
 
 Edited based on the reference [1][2].
 
