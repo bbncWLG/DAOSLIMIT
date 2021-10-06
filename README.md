@@ -45,6 +45,15 @@ Main modules description
 3. main_for_timelapse_miceliver.m: Pre-processes and 3D reconstruciton with DAO, time-weighted algorithm and time-loop algorithm (for time-lapse data) (>=40 GB memory)
 * Pre-processes including ImageRectification and pixel realignment are involved in main_for_static.m and main_for_timelapse.m.
 
+
+----------------
+Citation 
+---------------- 
+If you use this code please cite the companion paper where the orginal method appeared:
+
+Wu, J., Lu, Z. Jiang, D. et al. "Iterative tomography with digital adaptive optics permits hour-long intravital observation of 3D subcellular dynamics at millisecond scale". Cell (2021). https://doi.org/10.1016/j.cell.2021.04.029
+
+
 ----------------
 IMPORTANT NOTE 
 ---------------- 
